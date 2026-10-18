@@ -20,6 +20,8 @@
   document.addEventListener("site-language-change", event => {
     renderTimeline(event.detail.language);
     updateMusicControl();
+    const contactNote = document.querySelector("#contact-note");
+    if (contactNote) contactNote.textContent = (content.email || "").trim() || translate("contactPending");
   });
   const email = (content.email || "").trim();
   const contactLink = document.querySelector("#contact-link");
