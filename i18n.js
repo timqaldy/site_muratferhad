@@ -118,7 +118,7 @@
       element.innerHTML = selected === "tr" && tr[key] ? tr[key] : original;
     });
     ["alt", "aria-label", "title"].forEach(attribute => {
-      const dataAttribute = `data-i18n-${attribute}`;
+      const dataAttribute = attribute === "aria-label" ? "data-i18n-aria" : `data-i18n-${attribute}`;
       document.querySelectorAll(`[${dataAttribute}]`).forEach(element => {
         const key = element.getAttribute(dataAttribute);
         const original = remember(element, "attr", attribute);
