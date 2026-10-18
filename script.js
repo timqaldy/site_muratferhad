@@ -1,18 +1,26 @@
 (() => {
   const content = window.SITE_CONTENT || {};
   const timeline = document.querySelector("#timeline-items");
-  if (timeline) {
+  const renderTimeline = language => {
+    if (!timeline) return;
+    timeline.replaceChildren();
     (content.timeline || []).forEach((item, index) => {
+      const copy = language === "tr" && item.tr ? item.tr : item;
       const node = document.createElement("article");
       node.className = "timeline-item";
       node.innerHTML = `<span class="timeline-date"></span><h3></h3><p></p>`;
-      node.querySelector(".timeline-date").textContent = item.date;
-      node.querySelector("h3").textContent = item.title;
-      node.querySelector("p").textContent = item.detail;
+      node.querySelector(".timeline-date").textContent = copy.date;
+      node.querySelector("h3").textContent = copy.title;
+      node.querySelector("p").textContent = copy.detail;
       node.dataset.position = String(index + 1);
       timeline.append(node);
     });
-  }
+  };
+  renderTimeline(window.currentLanguage || "en");
+  document.addEventListener("site-language-change", event => {
+    renderTimeline(event.detail.language);
+    updateMusicControl();
+  });
   const email = (content.email || "").trim();
   const contactLink = document.querySelector("#contact-link");
   if (contactLink && email) {
@@ -42,19 +50,21 @@
   const audio = document.querySelector("#site-audio");
   const musicToggle = document.querySelector("#music-toggle");
   const musicLabel = document.querySelector("#music-label");
+  const translate = key => window.t ? window.t(key) : key;
   const updateMusicControl = () => {
     const playing = !audio.paused;
     const needsSound = audio.muted;
+    const label = playing ? (needsSound ? translate("musicEnable") : translate("musicPause")) : translate("musicPlay");
     musicToggle.setAttribute("aria-pressed", String(playing && !needsSound));
-    musicToggle.setAttribute("aria-label", playing ? (needsSound ? "Enable background music" : "Pause background music") : "Play background music");
-    musicLabel.textContent = playing ? (needsSound ? "Enable background music" : "Pause background music") : "Play background music";
+    musicToggle.setAttribute("aria-label", label);
+    musicLabel.textContent = label;
     musicToggle.classList.toggle("is-playing", playing);
   };
   audio.volume = 0.18;
   audio.addEventListener("play", updateMusicControl);
   audio.addEventListener("pause", updateMusicControl);
   audio.addEventListener("volumechange", updateMusicControl);
-  audio.addEventListener("error", () => { musicLabel.textContent = "Music file unavailable"; });
+  audio.addEventListener("error", () => { musicLabel.textContent = translate("musicUnavailable"); });
   const enableSound = async () => {
     if (!audio.muted) return;
     audio.muted = false;
@@ -63,7 +73,7 @@
       updateMusicControl();
     } catch {
       audio.muted = true;
-      musicLabel.textContent = "Tap to enable music";
+      musicLabel.textContent = translate("musicTapEnable");
     }
   };
   const enableOnFirstInteraction = event => {
@@ -79,11 +89,11 @@
     if (audio.muted) {
       await enableSound();
     } else if (audio.paused) {
-      try { await audio.play(); } catch { musicLabel.textContent = "Tap to enable music"; }
+      try { await audio.play(); } catch { musicLabel.textContent = translate("musicTapStart"); }
     } else {
       audio.pause();
     }
   });
   // Muted autoplay is permitted by most browsers; the first visitor gesture enables audible playback.
-  audio.play().catch(() => { musicLabel.textContent = "Tap to start music"; });
+  audio.play().catch(() => { musicLabel.textContent = translate("musicTapStart"); });
 })();
