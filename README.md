@@ -1,19 +1,27 @@
-# Murat Ferhat Yegül — personal website
+# Murad Ferhad — website
 
-A responsive, static website. Open `index.html` in a browser or publish the folder to any static hosting provider.
+A responsive, English-only static website for ney player, trombonist, composer and ney maker Murad Ferhad. The site keeps its warm neutral palette, editorial serif headlines and personal photographs. The visitor-facing content is present in HTML, so biographies, photographs and videos remain available if JavaScript is unavailable.
 
-The current visual system follows `DESIGN _2.md`: warm putty and ink, Playfair Display with Inter utility text, an oversized cropped name, pill actions, circular imagery, and alternating light and dark sections. The wide landscape and reed still life in `assets/` are original atmospheric artworks; they are not photographs of Murat or his ney. Keep using this design system for future changes.
+## Preview and publishing
+
+- Preview locally: `py -m http.server 8000`, then open `http://localhost:8000/`.
+- Build: no build step or package dependencies are required.
+- Publish: pushing to `main` starts the GitHub Pages deployment in `.github/workflows/pages.yml`. The existing `CNAME` keeps the custom domain configuration.
 
 ## Updating the site
 
-- Edit the biography timeline, email address, confirmed events and future improvement entries in `content.js`.
-- Replace the atmospheric circular artwork and labelled photo areas in `index.html` with approved photographs of Murat and his instruments when supplied.
-- Add each improvement only when Murat has approved the difficulty, design response, images, demo video and player feedback. Keep the “Detailed demonstrations coming soon” message until then.
-- Replace the upcoming audio and video cards with accessible media embeds or links when recordings are ready. Add captions to videos.
-- The Leighton House conversation is linked in the archive. The optional Gevende *Ev* link is labelled as a collaborative recording; confirm tracks and credits with Murat before keeping it public.
-- Add Murat's approved email in `content.js` to activate the contact link. Social profiles have not been added.
-- The page attempts to start `songs/MuradFerhad_1.mp3` on entry at a quiet volume. Browser autoplay policies may block sound until the visitor presses the floating music control; the control always allows pause and resume.
+- Short and expanded biographies, section copy, milestones and English interface labels: `index.html`.
+- Five music video titles, their order, YouTube links, embed IDs and player titles: `videos.html`. Keep each external link and embed ID paired.
+- Photograph order, captions, alt text, crops and gallery expansion: `index.html`; the image files remain in `images/`.
+- Background music controls: `script.js`; the audio file is `songs/MuradFerhad_1.mp3`. Playback starts only after the visitor presses the control.
+- To add confirmed contact details later, add a populated Contact section and a working `mailto:` destination in `index.html`, then add it to the navigation. No contact address is currently present.
 
-## Approval before publication
+## Existing routes and assets
 
-Confirm the biography wording and dates, all personal claims (including the trombone and composition recollections), the portrait and instrument photographs, the collaborative recording's tracks and credits, event details, contact address, and each description of Murat's instrument work with Murat. The cited album sources support recording credits; the statement about compositions given to Kırıka is presented as Murat's account. No upcoming release dates, technical mechanisms, measured benefits, patents or endorsements are claimed.
+- `index.html` is the homepage.
+- `videos.html` is the dedicated music videos page.
+- `styles.css` and `videos.css` contain the shared and video-page styles.
+- `images/` contains the supplied personal photographs; `songs/` contains the supplied background recording.
+- `assets/` contains the original atmospheric artwork kept with the source project.
+
+No CMS, backend, build tool or dependency installation is required.
