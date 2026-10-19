@@ -43,7 +43,6 @@
     publishedArchive: "YAYINLANMIŞ ARŞİV ÇALIŞMASI",
     conversation: "Murat'la<br>bir söyleşi",
     hostedBy: "Leighton House tarafından · 2020",
-    watchYoutube: "YouTube'da izle <span>↗</span>",
     albumNote: "Ortak kayıt: <a href=\"https://open.spotify.com/album/5UQedzl1m76VgUy1xEr8Lv\" target=\"_blank\" rel=\"noopener noreferrer\">Gevende, <em>Ev</em> ↗</a><span>Yayınlamadan önce parça ve albüm bilgilerini Murat'la doğrulayın.</span>",
     audio: "SES", audioPrep: "Ses örnekleri hazırlanıyor", inPreparation: "HAZIRLIK AŞAMASINDA",
     video: "VİDEO", innovationVideos: "Yenilik videoları", watchVideos: "VİDEOLARI İZLE <span aria-hidden=\"true\">↗</span>",
